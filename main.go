@@ -4,12 +4,13 @@ import (
 	"TODO-DIGITALENT/config"
 	"TODO-DIGITALENT/routes"
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	port := config.EnvPort()
+	port := os.Getenv("PORT")
 
 	if port == "" {
 		log.Fatal("$PORT must be set")
