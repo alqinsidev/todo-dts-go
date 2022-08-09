@@ -13,7 +13,7 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		log.Println("$PORT must be set")
 	}
 	config.ConnectDB()
 	server := gin.Default()

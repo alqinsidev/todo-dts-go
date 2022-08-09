@@ -10,7 +10,7 @@ import (
 func EnvMongoURI() string {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("error loading .env")
+		log.Println("error loading .env")
 	}
 
 	return os.Getenv("MONGO_URI")
@@ -19,7 +19,7 @@ func EnvMongoURI() string {
 func EnvPort() string {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("error loading .env")
+		log.Println("error loading .env")
 	}
 
 	return os.Getenv("PORT")
