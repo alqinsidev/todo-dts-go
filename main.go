@@ -11,5 +11,5 @@ func main() {
 	config.ConnectDB()
 	server := gin.Default()
 	routes.Route(server)
-	server.Run(":3333") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	server.Run(config.EnvPort()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
