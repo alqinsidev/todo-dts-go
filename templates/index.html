@@ -108,7 +108,7 @@
             const formData = $("#add_form").serializeArray()
             const jsonData = {}
             formData.forEach(item => jsonData[item.name] = item.value)
-            jsonData.due_date = moment($("#add_due_date").val()).toISOString()
+            jsonData.due_date = moment($("#add_due_date").val()).toISOString(true)
             $.ajax({
                 url:`/tasks`,
                 method:`POST`,
