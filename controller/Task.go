@@ -129,7 +129,38 @@ func EditTask() gin.HandlerFunc {
 		objId, _ := primitive.ObjectIDFromHex(id)
 
 		filter := bson.M{"id": objId}
-		update := bson.M{"title": input.Title, "assignee": input.Assignee, "due_date": input.DueDate, "updated_at": time.Now()}
+		update := bson.M{"title": input.Title, "assignee": input.Assignee, "duedate": input.DueDate, "updatedat": time.Now()}
+		result, err := taskCollection.UpdateOne(ctx, filter, bson.M{"$set": update})
+		if err != nil {
+			response.BadRequest(c, err.Error())
+			return
+		}
+
+		var updatedTask models.Task
+
+		if result.MatchedCount == 1 {
+			err := taskCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&updatedTask)
+			if err != nil {
+				response.BadRequest(c, err.Error())
+				return
+			}
+			response.Success(c, map[string]interface{}{"data": updatedTask})
+		}
+
+	}
+}
+
+func FinishTask() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancle := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancle()
+
+		id := c.Param("id")
+
+		objId, _ := primitive.ObjectIDFromHex(id)
+
+		filter := bson.M{"id": objId}
+		update := bson.M{"isdone": true, "updatedat": time.Now()}
 		result, err := taskCollection.UpdateOne(ctx, filter, bson.M{"$set": update})
 		if err != nil {
 			response.BadRequest(c, err.Error())

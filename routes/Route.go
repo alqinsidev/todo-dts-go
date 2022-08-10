@@ -13,6 +13,7 @@ func Route(r *gin.Engine) {
 	r.GET("/tasks", controller.GetTasks())
 	r.GET("/tasks/:id", controller.GetTask())
 	r.PUT("/tasks", controller.EditTask())
+	r.PATCH("/tasks/:id", controller.FinishTask())
 
 	r.LoadHTMLGlob("templates/*.html")
 	r.GET("/", func(c *gin.Context) {

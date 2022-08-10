@@ -11,6 +11,8 @@ type CreateTaskBody struct {
 }
 
 type EditTaskBody struct {
-	ID string `json:"id" validate:"required"`
-	CreateTaskBody
+	ID       string    `json:"id" validate:"required"`
+	Assignee string    `json:"assignee" validate:"required"`
+	DueDate  time.Time `json:"duedate" validate:"required"`
+	Title    string    `json:"title" validate:"required"`
 }
